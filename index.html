@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#004d66">
+    <title>AquaGuard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Start Menu -->
+    <div id="start-menu">
+        <h1>AquaGuard</h1>
+        <button id="playButton">Play</button>
+        <button id="leaderboardButton" onclick="showLeaderboardScreen()">Leaderboard</button>
+    </div>
+
+    <div id="story-screen" class="hidden">
+        <img id="story-image" src="assets/Introductory_cutscene.jpg" alt="Story Intro">
+        <button id="storyPreviousButton" onclick="showStartMenuFromStory()">Previous</button>
+        <button id="storyNextButton" onclick="showMissionFromStory()">Next</button>
+    </div>
+
+    <div id="mission-screen" class="hidden">
+        <p id="mission-text">Let's take the boat out and help clean up the trash in the ocean to help the environment!</p>
+        <img id="mission-image" src="boat/boat_move_side.png" alt="Mission Boat">
+        <button id="missionPreviousButton" onclick="showStoryFromMission()">Previous</button>
+        <button id="missionNextButton" onclick="showControlsFromMission()">Next</button>
+    </div>
+
+    <div id="controls-screen" class="hidden">
+        <img id="controls-image" src="assets/Controls_Screen.png" alt="Controls">
+        <button id="previousButton" onclick="showMissionFromControls()">Previous</button>
+        <button id="nextButton" onclick="startGameFromControls()">Next</button>
+    </div>
+
+    <!-- Leaderboard Screen -->
+    <div id="leaderboard-screen" class="hidden">
+        <div class="leaderboard-panel">
+            <div class="leaderboard-header">
+                <span class="header-rank">RANK</span>
+                <span class="header-username">USERNAME</span>
+                <span class="header-collected">COLLECTED</span>
+            </div>
+            <div class="leaderboard-rows" id="leaderboard-rows">
+                <!-- Rows will be populated by JavaScript -->
+            </div>
+            <button class="back-button" onclick="hideLeaderboardScreen()">BACK</button>
+        </div>
+    </div>
+
+    <div id="ui" class="hidden">
+        <div class="stat-card">
+            <div class="label">TRASH COLLECTED</div>
+            <div id="score" class="value">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="label">TIME REMAINING</div>
+            <div id="timer" class="value">60</div>
+        </div>
+        <!-- <div class="controls-hint">
+            [W & MOUSE CURSOR] Steer  |  [Left_Click] Launch Claw
+        </div> -->
+    </div>
+
+    <div id="mobile-controls" class="hidden">
+        <div id="mobile-dpad">
+            <button class="mobile-btn up" data-key="KeyW">▲</button>
+            <button class="mobile-btn left" data-key="KeyA">◀</button>
+            <button class="mobile-btn down" data-key="KeyS">▼</button>
+            <button class="mobile-btn right" data-key="KeyD">▶</button>
+        </div>
+        <button id="mobile-grab" class="mobile-btn">GRAB</button>
+        <button id="mobile-pause-btn" class="mobile-btn pause-btn">⏸</button>
+    </div>
+
+    <div id="game-over" class="hidden">
+        <h1>Cleanup Complete!</h1>
+        <p>You removed <span id="final-score">0</span> trash.</p>
+            <div id="leaderboard-status"></div>
+            <input type="text" id="player-name" placeholder="Enter your name" maxlength="20">
+            <button onclick="submitScore()">Submit Score</button>
+            <button onclick="startGame()">Play Again</button>
+            <button onclick="returnToMenu()">Return to Menu</button>
+    </div>
+
+    <!-- Pause / Settings Screen -->
+    <div id="pause-screen" class="hidden">
+        <div class="pause-panel">
+            <h1>AQUAGUARD IS PAUSED</h1>
+            
+            <div class="volume-control">
+                <label for="music-volume">MUSIC</label>
+                <input type="range" id="music-volume" min="0" max="100" value="30">
+            </div>  
+            <div class="volume-control">
+                <label for="sfx-volume">SOUND EFFECTS</label>
+                <input type="range" id="sfx-volume" min="0" max="100" value="70">
+            </div>
+            <button onclick="quitToMenu()">QUIT GAME</button>
+            <p class="resume-hint">ESC TO RESUME</p>
+        </div>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>AquaGuard - Alpha Build</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="ui">
+        Trash Collected: <span id="score">0</span>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html> -->
